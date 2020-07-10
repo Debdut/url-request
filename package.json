@@ -1,6 +1,6 @@
 {
   "name": "url-request",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Build Urls and Send Requests 🤟and forget 🥱😴",
   "main": "index.js",
   "scripts": {
