@@ -5,7 +5,7 @@ Build Urls and Send Requests 🤟and forget 🥱😴
 ## Initialize
 
 ```js
-const Url = require('Url')
+const Url = require('url-request')
 ```
 
 ## Examples
