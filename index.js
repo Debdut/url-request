@@ -8,6 +8,7 @@ class Url {
     this.queries = []
     this.fragments = []
     this.responseEncoding = 'json'
+    this.invokeCommands = []
   }
 
   go (p) {
@@ -77,8 +78,31 @@ class Url {
     await this.request('POST', body)
   }
 
-  async get () {
-    await this.request('GET')
+  async get (body) {
+    await this.request('GET', body)
+  }
+
+  // Lazy Execute and Programability
+  invoke (command, ...args) {
+    this.invokeCommands.push([ command, args ])
+    return this
+  }
+
+  async execute (invokeCommands) {
+    const pairs = this.invokeCommands.concat(invokeCommands)
+    for (const index = 0; index < pairs.length - 1; index++) {
+      const [ command, args ] = pairs[index]
+      const out = this[command](...args)
+      if (out.constructor.name === 'Promise') {
+        await out
+      }
+    }
+    const [ command, args ] = pairs[pairs.length - 1]
+    let out = this[command](...args)
+    if (out.constructor.name === 'Promise') {
+        out = await out
+    }
+    return out
   }
 }
 
