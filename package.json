@@ -2,9 +2,10 @@
   "name": "url-request",
   "version": "1.0.1",
   "description": "Build Urls and Send Requests 🤟and forget 🥱😴",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test",
+    "build": "rollup src/index.js --file lib/index.js --format umd"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "bent": "^7.3.7"
   },
   "devDependencies": {
-    "mocha": "^8.0.1"
+    "mocha": "^8.0.1",
+    "rollup": "^2.21.0"
   }
 }

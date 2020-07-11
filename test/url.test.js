@@ -1,6 +1,6 @@
 const assert = require('assert')
 
-const Url = require('../index')
+const Url = require('../lib/index')
 
 describe('Url Class', () => {
   describe('url Generate', () => {

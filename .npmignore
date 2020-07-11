@@ -1,0 +1,6 @@
+.travis.yml
+src
+test
+.gitignore
+.DS_Store
+.vscode
