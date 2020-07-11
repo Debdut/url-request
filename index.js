@@ -26,7 +26,7 @@ class Url {
     return this
   }
 
-  encode (encoding) {
+  encodeResponse (encoding) {
     this.responseEncoding = encoding
     return this
   }
@@ -58,28 +58,47 @@ class Url {
   }
 
   get url () {
-    const remainder = this.remainder
-    return this.baseUri +
-      (remainder.length > 0 ? '/' : '') + remainder
+    return this.baseUri + this.remainder
   }
 
-  async request (method, body) {
-    const req = bent(this.baseUri, method, responseEncoding)
-    let res
-    if (body) {
-      res = await req(this.remainder, body)
-    } else {
-      res = await req(this.remainder)
+  request (method, body, statusCode) {
+    let args = [this.baseUri, method]
+    if (this.responseEncoding) {
+      args.push(this.responseEncoding)
+    } else if (body && typeof body === 'object') {
+      args.push('json')
     }
-    return res
+    if (statusCode) {
+      args.push(statusCode)
+    }
+    const req = bent(...args)
+
+    args = [this.remainder]
+    if (body) {
+      args.push(body)
+    }
+
+    return req(...args)
   }
 
-  async post (body) {
-    await this.request('POST', body)
+  post (body, statusCode) {
+    return this.request('POST', body, statusCode)
   }
 
-  async get (body) {
-    await this.request('GET', body)
+  get (body, statusCode) {
+    return this.request('GET', body, statusCode)
+  }
+
+  put (body, statusCode) {
+    return this.request('PUT', body, statusCode)
+  }
+
+  patch (body, statusCode) {
+    return this.request('PATCH', body, statusCode)
+  }
+
+  delete (body, statusCode) {
+    return this.request('DELETE', body, statusCode)
   }
 
   // Lazy Execute and Programability
@@ -88,21 +107,14 @@ class Url {
     return this
   }
 
-  async execute (invokeCommands) {
+  execute (invokeCommands) {
     const pairs = this.invokeCommands.concat(invokeCommands)
     for (const index = 0; index < pairs.length - 1; index++) {
       const [ command, args ] = pairs[index]
-      const out = this[command](...args)
-      if (out.constructor.name === 'Promise') {
-        await out
-      }
+      this[command](...args)
     }
     const [ command, args ] = pairs[pairs.length - 1]
-    let out = this[command](...args)
-    if (out.constructor.name === 'Promise') {
-        out = await out
-    }
-    return out
+    return this[command](...args)
   }
 }
 

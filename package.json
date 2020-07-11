@@ -4,7 +4,7 @@
   "description": "Build Urls and Send Requests 🤟and forget 🥱😴",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
