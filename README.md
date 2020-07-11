@@ -92,11 +92,11 @@ const userApi = new Url('https://api.workpay.com')
   .go('user')
   .go(123)
 
-const subscriptionsApi = user
+const subscriptionsApi = userApi
   .fork()
   .fragment('subscriptions')
 
-const achievementsApi = user
+const achievementsApi = userApi
   .fork()
   .fragment('achievements')
 
