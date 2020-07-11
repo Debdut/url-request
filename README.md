@@ -1,6 +1,7 @@
 # Url
-Build Urls and Send Requests 🤟and forget 🥱😴
+A Url Builder and Request Library with Functional Chaining, Async/Await and Fork Capabilities to build your all API calls. 
 
+Build Urls and Send Requests 🤟and forget 🥱😴!
 
 ## Initialize
 
@@ -12,30 +13,27 @@ const Url = require('url-request')
 
 ### GET Request w/ Promise
 
-```js
-// Send a GET request to 
-// https://my-json-server.typicode.com/typicode/demo/posts/comments
-// with an access token
-// then display the result
-// or catch errors
+Send a GET request to `https://my-json-server.typicode.com/typicode/demo/posts/comments` with an access token, then display the result or catch errors.
 
-new Url('https://my-json-server.typicode.com') // Base URI
-  .go('typicode/demo') // Go to Path
+```js
+new Url('https://my-json-server.typicode.com')
+  .go('typicode/demo')
   .go('posts')
-  .go('comments')
-  .query({ access_token: 'MyAccessToken' }) // Queries
-  .query({ object: page })
+  .query({ access_token: 'MyAccessToken' })
   .get() // GET Request
-  .then(json => console.log(json))
+  .then(json => console.log(json)) 
   .catch(err => console.error('Error - ', err))
+```
+```js
+[{ id: 1, post: 'Post 1' },
+ { id: 2, post: 'Post 2' }]
 ```
 
 ### Build A Complex Url
 
-```js
-// Build a complex URL
-// with queries, fragments
+Build Complex Urls with deep paths, multiple queries (lists are supported) and fragments.
 
+```js
 const url = new Url('https://api.workpay.com')
   .go('rooms')
   .go('open/users')
@@ -44,23 +42,21 @@ const url = new Url('https://api.workpay.com')
   .fragment('bio')
   .url
   
-// https://api.workpay.com//rooms/open/users?id=10,12,13,14&access_token=<TOKEN>&password=<PASSWORD>#bio
+// https://api.workpay.com//rooms/open/users?id=10,12,13,14&
+// access_token=<TOKEN>&password=<PASSWORD>#bio
 ```
 
 ### POST Request w/ Promise
 
-```js
-// A Post request
-// with a body
+A POST request with a body `{ subscrbe: 'Apple Music' }` at `https://api.workpay.com/user/123#subscriptions`
 
-new Url(config.baseUri)
-  .go(218382378)
-  .go('subscriptions')
-  .query({ object: page })
-  .query({ fields })
-  .query({ include_values: true })
-  .post()
-  .then(json => console.log(json))
+```js
+new Url('https://api.workpay.com')
+  .go('user')
+  .go(123)
+  .fragment('subscriptions')
+  .post({ subscrbe: 'Apple Music' })
+  .then(json => console.log(json)) // { success: true }
   .catch(err => console.error(err))
 ```
 
@@ -87,7 +83,27 @@ new Url('https://postman-echo.com')
   .then(res => res.json())
   .then(json => console.log(json))
   .catch(err => console.error(err))
+```
 
+### Fork
+
+```js
+const userApi = new Url('https://api.workpay.com')
+  .go('user')
+  .go(123)
+
+const subscriptionsApi = user
+  .fork()
+  .fragment('subscriptions')
+
+const achievementsApi = user
+  .fork()
+  .fragment('achievements')
+
+[ userApi, subscriptionsApi, achievementsApi ]
+  .forEach(api => api
+    .then(json => console.log(json))
+    .catch(err => console.log(err)))
 ```
 
 ## Functions
@@ -100,6 +116,9 @@ class Url {
   go (path) // Go to Sub Path
   query (q) // q is query object
   fragment (f) // add fragments like #profile
+
+  // Fork
+  fork ()
   
   // default encoding is 'json', can be null, 'string', 'buffer'
   encodeResponse (encoding) 

@@ -1,14 +1,20 @@
 const bent = require('bent')
 
 class Url {
-  constructor (baseUri) {
+  constructor (baseUri, headers = {}, path = [], queries = [], fragments = [], responseEncoding = 'json', invokeCommands = []) {
     this.baseUri = baseUri
-    this.headers = {}
-    this.path = []
-    this.queries = []
-    this.fragments = []
-    this.responseEncoding = 'json'
-    this.invokeCommands = []
+    this.headers = headers
+    this.path = path
+    this.queries = queries
+    this.fragments = fragments
+    this.responseEncoding = responseEncoding
+    this.invokeCommands = invokeCommands
+  }
+
+  fork () {
+    const clone = new Url(this.baseUri, this.headers, this.path, this.queries, this.fragments, this.responseEncoding, this.invokeCommands)
+
+    return clone
   }
 
   go (p) {
