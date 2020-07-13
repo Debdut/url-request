@@ -1,8 +1,16 @@
 # url-request
 
-[![Generic badge](https://img.shields.io/badge/build-passing-color.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/async/await-on-blue.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/functional-on-red.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/build-passing-color.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/async/await-yes-blue.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/functional-yes-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/tests-passing-green.svg)](https://shields.io/)
 
-> _A Url Builder and Request Library with Functional Chaining, Async/Await and Fork Capabilities to build your all API calls. Build Urls and Send Requests 🤟and forget 🥱😴!_
+> _A HTTP Client and Url Builder with Functional Chaining, Async/Await and Fork for building your Complex APIs easily._
+
+Alternative to Requests, Axios, and Got.
+
+## Installation
+
+```sh
+npm install url-request --save
+```
 
 ## Initialize
 
@@ -12,9 +20,12 @@ const Url = require('url-request')
 
 ## Examples
 
+Look [Examples](/examples)
+
 ### GET Request w/ Promise
 
-Send a GET request to `https://my-json-server.typicode.com/typicode/demo/posts/comments` with an access token, then display the result or catch errors.
+Send a GET request with an access token, then display the result or catch errors.
+`GET https://my-json-server.typicode.com/typicode/demo/posts/comments`
 
 ```js
 new Url('https://my-json-server.typicode.com')
@@ -23,7 +34,7 @@ new Url('https://my-json-server.typicode.com')
   .query({ access_token: 'MyAccessToken' })
   .get() // GET Request
   .then(json => console.log(json)) 
-  .catch(err => console.error('Error - ', err))
+  .catch(err => console.error('[Error]', err))
 ```
 ```js
 [{ id: 1, post: 'Post 1' },
@@ -39,12 +50,12 @@ const url = new Url('https://api.workpay.com')
   .go('rooms')
   .go('open/users')
   .query({ id: [10, 12, 13, 14] })
-  .query({ access_token: '<TOKEN>', password: '<PASSWORD>'})
+  .query({ access_token: 'my-token', password: 'password'})
   .fragment('bio')
   .url
   
 // https://api.workpay.com//rooms/open/users?id=10,12,13,14&
-// access_token=<TOKEN>&password=<PASSWORD>#bio
+// access_token=my-token&password=password#bio
 ```
 
 ### POST Request w/ Promise

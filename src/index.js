@@ -1,4 +1,5 @@
 import bent from 'bent'
+// const bent = require('bent')
 
 class Url {
   constructor (baseUri, headers = {}, path = [], queries = {}, fragments = [], responseEncoding = 'json', invokeCommands = []) {
@@ -60,12 +61,7 @@ class Url {
   }
 
   request (method, body, statusCode) {
-    let args = [this.baseUri, method]
-    if (this.responseEncoding) {
-      args.push(this.responseEncoding)
-    } else if (body && typeof body === 'object') {
-      args.push('json')
-    }
+    let args = [this.baseUri, method, this.responseEncoding]
     if (statusCode) {
       args.push(statusCode)
     }
@@ -105,15 +101,19 @@ class Url {
     return this
   }
 
-  execute (invokeCommands) {
-    const pairs = this.invokeCommands.concat(invokeCommands)
-    for (const index = 0; index < pairs.length - 1; index++) {
-      const [ command, args ] = pairs[index]
+  execute (invokeCommands = []) {
+    let pairs = this.invokeCommands
+    if (invokeCommands.length > 0) {
+      pairs = pairs.concat(invokeCommands)
+    }
+    for (let index = 0; index < pairs.length - 1; index++) {
+      const [ command, ...args ] = pairs[index]
       this[command](...args)
     }
-    const [ command, args ] = pairs[pairs.length - 1]
+    const [ command, ...args ] = pairs[pairs.length - 1]
     return this[command](...args)
   }
 }
 
 export default Url
+// module.exports = Url

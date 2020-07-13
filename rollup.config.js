@@ -8,6 +8,7 @@ export default {
         name: 'url',
         globals: { bent: 'bent' }
     },
+    external: [ 'bent' ],
     plugins: [
         babel({ exclude: 'node_modules/**' })
     ]

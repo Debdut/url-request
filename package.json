@@ -1,7 +1,7 @@
 {
   "name": "url-request",
-  "version": "1.0.3",
-  "description": "Build Urls and Send Requests 🤟and forget 🥱😴",
+  "version": "1.0.4",
+  "description": "A HTTP Client and Url Builder with Functional Chaining, Async/Await and Fork.",
   "main": "./lib/index.js",
   "scripts": {
     "test": "mocha test",
@@ -15,10 +15,11 @@
     "request",
     "axios",
     "fetch",
+    "node-fetch",
+    "got",
     "url-builder",
     "url",
-    "uri",
-    "node-fetch"
+    "uri"
   ],
   "author": "Debdut Karmakar <iawaiponly@gmail.com>",
   "license": "MIT",
