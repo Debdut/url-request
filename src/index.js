@@ -1,7 +1,7 @@
-const bent = require('bent')
+import bent from 'bent'
 
 class Url {
-  constructor (baseUri, headers = {}, path = [], queries = [], fragments = [], responseEncoding = 'json', invokeCommands = []) {
+  constructor (baseUri, headers = {}, path = [], queries = {}, fragments = [], responseEncoding = 'json', invokeCommands = []) {
     this.baseUri = baseUri
     this.headers = headers
     this.path = path
@@ -23,7 +23,7 @@ class Url {
   }
 
   query (q) {
-    this.queries.push(this.resolveQuery(q))
+    this.queries = { ...this.queries, ...q }
     return this
   }
 
@@ -37,29 +37,21 @@ class Url {
     return this
   }
 
-  resolveQuery (q) {
-    let qs = []
-    for (const key in q) {
-      if (Object.prototype.hasOwnProperty.call(q, key)) {
-        let val = q[key]
-        if (Array.isArray(val)) {
-          val = val
-            .join(',')
-        }
-        qs.push(`${key}=${val}`)
-      }
-    }
-    return qs.join('&')
-  }
-
   header (headers) {
     this.headers = headers
     return this
   }
 
+  get _query () {
+    return Object.keys(this.queries)
+      .map(key => `${key}=${this.queries[key]}`)
+      .join('&')
+  }
+
   get remainder () {
+    const query = this._query
     return (this.path.length > 0 ? '/' : '') + this.path.join('/') +
-      (this.queries.length > 0 ? '?' : '') + this.queries.join('&') +
+      (query.length > 0 ? '?' : '') + query +
       (this.fragments.length > 0 ? '#' : '') + this.fragments.join('#')
   }
 
@@ -124,4 +116,4 @@ class Url {
   }
 }
 
-module.exports = Url
+export default Url

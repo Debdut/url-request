@@ -4,3 +4,6 @@ test
 .gitignore
 .DS_Store
 .vscode
+*.config.js
+.babelrc
+examples

@@ -5,7 +5,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "test": "mocha test",
-    "build": "rollup src/index.js --file lib/index.js --format umd"
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,10 @@
     "bent": "^7.3.7"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
     "mocha": "^8.0.1",
-    "rollup": "^2.21.0"
+    "rollup": "^2.21.0",
+    "rollup-plugin-babel": "^4.4.0"
   }
 }
