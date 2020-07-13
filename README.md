@@ -47,8 +47,7 @@ Build Complex Urls with deep paths, multiple queries (lists are supported) and f
 
 ```js
 const url = new Url('https://api.workpay.com')
-  .go('rooms')
-  .go('open/users')
+  .go('rooms', 'open', 'users')
   .query({ id: [10, 12, 13, 14] })
   .query({ access_token: 'my-token', password: 'password'})
   .fragment('bio')
@@ -64,8 +63,7 @@ A POST request with a body `{ subscrbe: 'Apple Music' }` at `https://api.workpay
 
 ```js
 new Url('https://api.workpay.com')
-  .go('user')
-  .go(123)
+  .go('user', 123)
   .fragment('subscriptions')
   .post({ subscrbe: 'Apple Music' })
   .then(json => console.log(json)) // { success: true }
@@ -101,8 +99,7 @@ new Url('https://postman-echo.com')
 
 ```js
 const userApi = new Url('https://api.workpay.com')
-  .go('user')
-  .go(123)
+  .go('user', 123)
 
 const subscriptionsApi = userApi
   .fork()
@@ -125,7 +122,7 @@ class Url {
 
   // Url Construction
   constructor (baseUri) // Start with the baseUri
-  go (path) // Go to Sub Path
+  go (...paths) // Go to Sub Path
   query (q) // q is query object
   fragment (f) // add fragments like #profile
 

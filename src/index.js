@@ -18,8 +18,8 @@ class Url {
     return clone
   }
 
-  go (p) {
-    this.path.push(p)
+  go (...args) {
+    this.path = this.path.concat(args)
     return this
   }
 
