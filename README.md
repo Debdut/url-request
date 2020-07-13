@@ -1,7 +1,8 @@
-# Url
-A Url Builder and Request Library with Functional Chaining, Async/Await and Fork Capabilities to build your all API calls. 
+# url-request
 
-Build Urls and Send Requests 🤟and forget 🥱😴!
+[![Generic badge](https://img.shields.io/badge/build-passing-color.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/async/await-on-blue.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/functional-on-red.svg)](https://shields.io/)
+
+> _A Url Builder and Request Library with Functional Chaining, Async/Await and Fork Capabilities to build your all API calls. Build Urls and Send Requests 🤟and forget 🥱😴!_
 
 ## Initialize
 
