@@ -2,8 +2,8 @@
 src
 test
 .gitignore
-.DS_Store
-.vscode
+**/.DS_Store
+**/.vscode
 *.config.js
 .babelrc
 examples
