@@ -7,3 +7,4 @@ test
 *.config.js
 .babelrc
 examples
+scripts

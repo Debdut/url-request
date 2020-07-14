@@ -115,6 +115,26 @@ const achievementsApi = userApi
     .catch(err => console.log(err)))
 ```
 
+### Infinite Chain
+
+See [Infinite Chain Example](/examples/infinite-chain.js)
+
+```js
+Url('https://my-json-server.typicode.com')
+  .go('typicode/demo')
+  .go('posts')
+  .get()
+  .then(json => console.log('[1]', json)) 
+  .catch(err => console.error('[Error]', err))
+  .go(1)
+  .get()
+  .then(json => console.log('[2]', json)) 
+  .catch(err => console.error('[Error]', err))
+  .post()
+  .post()
+  ... // Keep on going!
+```
+
 ## Functions
 
 ```js

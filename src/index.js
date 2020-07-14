@@ -10,6 +10,8 @@ class Url {
     this.fragments = fragments
     this.responseEncoding = responseEncoding
     this.invokeCommands = invokeCommands
+    this.isCatch = false
+    this.requestStore = null
   }
 
   fork () {
@@ -76,23 +78,54 @@ class Url {
   }
 
   post (body, statusCode) {
-    return this.request('POST', body, statusCode)
+    this.requestStore = this.request('POST', body, statusCode)
+    this.isCatch = false
+    return this
   }
 
   get (body, statusCode) {
-    return this.request('GET', body, statusCode)
+    this.requestStore = this.request('GET', body, statusCode)
+    this.isCatch = false
+    return this
   }
 
   put (body, statusCode) {
-    return this.request('PUT', body, statusCode)
+    this.requestStore = this.request('PUT', body, statusCode)
+    this.isCatch = false
+    return this
   }
 
   patch (body, statusCode) {
-    return this.request('PATCH', body, statusCode)
+    this.requestStore = this.request('PATCH', body, statusCode)
+    this.isCatch = false
+    return this
   }
 
   delete (body, statusCode) {
-    return this.request('DELETE', body, statusCode)
+    this.requestStore = this.request('DELETE', body, statusCode)
+    this.isCatch = false
+    return this
+  }
+
+  then (handle, reject) {
+    if (!this.isCatch) {
+      this.requestStore = this.requestStore
+        .then(handle, reject)
+    }
+    return this
+  }
+
+  catch (reject) {
+    this.isCatch = false
+    this.requestStore = this.requestStore
+      .catch(reject)
+    return this
+  }
+
+  finally (all) {
+    this.requestStore = this.requestStore
+      .finally()
+    return this
   }
 
   // Lazy Execute and Programability
