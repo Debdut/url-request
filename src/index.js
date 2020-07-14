@@ -1,5 +1,5 @@
-import bent from 'bent'
-// const bent = require('bent')
+import bent from '@debdut/bent'
+// const bent = require('@debdut/bent')
 
 class Url {
   constructor (baseUri, headers = {}, path = [], queries = {}, fragments = [], responseEncoding = 'json', invokeCommands = []) {
@@ -12,6 +12,8 @@ class Url {
     this.invokeCommands = invokeCommands
     this.isCatch = false
     this.requestStore = null
+    this.delayTotal = 0
+    this.delayBefore = 0
   }
 
   fork () {
@@ -69,10 +71,7 @@ class Url {
     }
     const req = bent(...args)
 
-    args = [this.remainder]
-    if (body) {
-      args.push(body)
-    }
+    args = [this.remainder, body, this.headers, this.delayTotal, this.delayFunc, this.delayBefore]
 
     return req(...args)
   }
@@ -125,6 +124,13 @@ class Url {
   finally (all) {
     this.requestStore = this.requestStore
       .finally(all)
+    return this
+  }
+
+  delay(time, func) {
+    this.delayBefore = this.delayTotal
+    this.delayTotal += time
+    this.delayFunc = func
     return this
   }
 

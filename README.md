@@ -1,8 +1,9 @@
 # url-request
 
-[![Generic badge](https://img.shields.io/badge/build-passing-color.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/async/await-yes-blue.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/functional-yes-red.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/tests-passing-green.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/build-1k-success.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/tests-100%-brightgreen.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/async/await-yes-0390fc.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/functional-yes-fa166a.svg)](https://shields.io/)
 
-> _A HTTP Client and Url Builder with Functional Chaining, Async/Await and Fork for building your Complex APIs easily._
+> _A HTTP Client and Url Builder with Functional Chaining, Async/Await, Delay, Fork and Infinite Chaining for building your Complex APIs easily._
 
 Alternative to Requests, Axios, and Got.
 
@@ -135,6 +136,17 @@ Url('https://my-json-server.typicode.com')
   ... // Keep on going!
 ```
 
+### Delay
+
+Delay your requests!
+
+```js
+Url('https://postman-echo.com/post')
+  .delay(2000, () => console.log('Wait 2s'))
+  .post({ foo1: 'bar1', foo2: 'bar2' })
+
+```
+
 ## Functions
 
 ```js
@@ -164,6 +176,12 @@ class Url {
   put (body, statusCode) // PUT Request
   delete (body, statusCode) // DELETE Request
   patch (body, statusCode) // PATCH Request
+
+  then (func)
+  catch (func)
+  finally (func)
+
+  delay (time, func)
 
   // Command Control, Lazy Execution
   invoke (command, ...args)

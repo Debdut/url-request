@@ -6,9 +6,9 @@ export default {
         file: './lib/index.js',
         format: 'umd',
         name: 'url',
-        globals: { bent: 'bent' }
+        globals: { '@debdut/bent': '@debdut/bent' }
     },
-    external: [ 'bent' ],
+    external: [ '@debdut/bent' ],
     plugins: [
         babel({ exclude: 'node_modules/**' })
     ]
