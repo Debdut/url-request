@@ -1,6 +1,6 @@
 {
   "name": "url-request",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A HTTP Client and Url Builder with Functional Chaining, Async/Await and Fork.",
   "main": "./lib/index.js",
   "scripts": {
@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/Debdut/Url#readme",
   "dependencies": {
-    "@debdut/bent": "0.0.2"
+    "@debdut/bent": "0.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",

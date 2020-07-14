@@ -3,7 +3,7 @@
 [![Generic badge](https://img.shields.io/badge/build-1k-success.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/tests-100%25-brightgreen.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/async/await-yes-0390fc.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/functional-yes-fa166a.svg)](https://shields.io/)
 
-> _A HTTP Client and Url Builder with Functional Chaining, Async/Await, Delay, Fork and Infinite Chaining for building your Complex APIs easily._
+> _The most advanced HTTP Client and Url Builder with Functional Chaining, Async/Await, Delay, Fork, Infinite Chaining and Repeat for building your Complex APIs easily._
 
 Alternative to Requests, Axios, and Got.
 
@@ -23,35 +23,16 @@ const Url = require('url-request')
 
 Look [Examples](/examples)
 
-### Delay
+### Repeat
 
-Delay your requests!
-
-```js
-Url('https://postman-echo.com/post')
-  .delay(2000, () => console.log('Wait 2s'))
-  .post({ foo1: 'bar1', foo2: 'bar2' })
-
-```
-
-### Infinite Chain
-
-See [Infinite Chain Example](/examples/infinite-chain.js)
+Building a Ping server was never as easy! This pings at an interval of 1s and let's you know if you're connected or not.
 
 ```js
-Url('https://my-json-server.typicode.com')
-  .go('typicode/demo')
-  .go('posts')
+Url('https://postman-echo.com/get')
   .get()
-  .then(json => console.log('[1]', json)) 
-  .catch(err => console.error('[Error]', err))
-  .go(1)
-  .get()
-  .then(json => console.log('[2]', json)) 
-  .catch(err => console.error('[Error]', err))
-  .post()
-  .post()
-  ... // Keep on going!
+  .then(() => console.log('Ping Successful! Internet is up 🤟')) 
+  .catch(() => console.log('Ping Failed! Internet is down 😭'))
+  .repeat(1000, 100) // time 1000ms
 ```
 
 ### GET Request w/ Promise
@@ -147,6 +128,37 @@ const post = async () => {
 }
 ```
 
+### Delay
+
+Delay your requests!
+
+```js
+Url('https://postman-echo.com/post')
+  .delay(2000, () => console.log('Wait 2s'))
+  .post({ foo1: 'bar1', foo2: 'bar2' })
+
+```
+
+### Infinite Chain
+
+See [Infinite Chain Example](/examples/infinite-chain.js)
+
+```js
+Url('https://my-json-server.typicode.com')
+  .go('typicode/demo')
+  .go('posts')
+  .get()
+  .then(json => console.log('[1]', json)) 
+  .catch(err => console.error('[Error]', err))
+  .go(1)
+  .get()
+  .then(json => console.log('[2]', json)) 
+  .catch(err => console.error('[Error]', err))
+  .post()
+  .post()
+  ... // Keep on going!
+```
+
 ## Functions
 
 ```js
@@ -182,6 +194,7 @@ class Url {
   finally (func)
 
   delay (time, func)
+  repeat (time, count)
 
   // Command Control, Lazy Execution
   invoke (command, ...args)
