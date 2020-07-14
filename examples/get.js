@@ -1,6 +1,6 @@
 const Url = require('../lib')
 
-new Url('https://my-json-server.typicode.com')
+Url('https://my-json-server.typicode.com')
   .go('typicode/demo')
   .go('posts')
   .get()

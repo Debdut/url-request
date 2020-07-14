@@ -1,6 +1,6 @@
 const Url = require('../lib')
 
-const url = new Url('https://api.workpay.com')
+const url = Url('https://api.workpay.com')
   .go('rooms')
   .go('open/users')
   .query({ id: [10, 12, 13, 14] })

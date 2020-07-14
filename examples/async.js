@@ -1,7 +1,7 @@
 const Url = require('../lib')
 
 const post = async () => {
-  const request = new Url('https://postman-echo.com')
+  const request = Url('https://postman-echo.com')
     .go('post')
     .post({ foo1: 'bar1', foo2: 'bar2' })
   

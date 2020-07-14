@@ -1,6 +1,6 @@
 const Url = require('../lib')
 
-const Api = new Url('https://my-json-server.typicode.com')
+const Api = Url('https://my-json-server.typicode.com')
   .go('typicode', 'demo')
 
 const Posts = Api

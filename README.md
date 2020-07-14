@@ -28,7 +28,7 @@ Send a GET request with an access token, then display the result or catch errors
 `GET https://my-json-server.typicode.com/typicode/demo/posts/comments`
 
 ```js
-new Url('https://my-json-server.typicode.com')
+Url('https://my-json-server.typicode.com')
   .go('typicode/demo')
   .go('posts')
   .query({ access_token: 'MyAccessToken' })
@@ -46,7 +46,7 @@ new Url('https://my-json-server.typicode.com')
 Build Complex Urls with deep paths, multiple queries (lists are supported) and fragments.
 
 ```js
-const url = new Url('https://api.workpay.com')
+const url = Url('https://api.workpay.com')
   .go('rooms', 'open', 'users')
   .query({ id: [10, 12, 13, 14] })
   .query({ access_token: 'my-token', password: 'password'})
@@ -62,7 +62,7 @@ const url = new Url('https://api.workpay.com')
 A POST request with a body `{ subscrbe: 'Apple Music' }` at `https://api.workpay.com/user/123#subscriptions`
 
 ```js
-new Url('https://api.workpay.com')
+Url('https://api.workpay.com')
   .go('user', 123)
   .fragment('subscriptions')
   .post({ subscrbe: 'Apple Music' })
@@ -74,7 +74,7 @@ new Url('https://api.workpay.com')
 
 ```js
 const post = async () => {
-  const request = new Url('https://postman-echo.com')
+  const request = Url('https://postman-echo.com')
     .go('post')
     .post({ foo1: 'bar1', foo2: 'bar2' })
   
@@ -85,7 +85,7 @@ const post = async () => {
 ### Invoke / Execute
 
 ```js
-new Url('https://postman-echo.com')
+Url('https://postman-echo.com')
   .invoke('go', 'post')
   .invoke('encodeResponse', null) // To Get Full Response Object
   .invoke('post', { foo1: 'bar1', foo2: 'bar2' })
@@ -98,7 +98,7 @@ new Url('https://postman-echo.com')
 ### Fork
 
 ```js
-const userApi = new Url('https://api.workpay.com')
+const userApi = Url('https://api.workpay.com')
   .go('user', 123)
 
 const subscriptionsApi = userApi

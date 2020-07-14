@@ -4,7 +4,7 @@ const Url = require('../lib/index')
 
 describe('Url Class', () => {
   describe('url Generate', () => {
-    const url = new Url('https://api.workpay.com')
+    const url = Url('https://api.workpay.com')
       .go('rooms')
       .go('open/users')
       .query({ id: [10, 12, 13, 14] })
@@ -19,7 +19,7 @@ describe('Url Class', () => {
 
   describe('GET Request', () => {
 
-    const request = new Url('https://postman-echo.com')
+    const request = Url('https://postman-echo.com')
       .go('get')
       .query({ foo1: 'bar1' })
       .query({ foo2: 'bar2' })
@@ -36,7 +36,7 @@ describe('Url Class', () => {
   describe('POST Request', () => {
 
     const body = { foo1: 'bar1', foo2: 'bar2' }
-    const request = new Url('https://postman-echo.com')
+    const request = Url('https://postman-echo.com')
       .go('post')
       .post(body)
 

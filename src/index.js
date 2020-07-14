@@ -13,7 +13,7 @@ class Url {
   }
 
   fork () {
-    const clone = new Url(this.baseUri, this.headers, this.path, this.queries, this.fragments, this.responseEncoding, this.invokeCommands)
+    const clone = Url(this.baseUri, this.headers, this.path, this.queries, this.fragments, this.responseEncoding, this.invokeCommands)
 
     return clone
   }
@@ -114,6 +114,6 @@ class Url {
     return this[command](...args)
   }
 }
-
-export default Url
+const _Url = (...args) => new Url(...args)
+export default _Url
 // module.exports = Url

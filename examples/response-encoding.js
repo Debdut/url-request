@@ -1,7 +1,7 @@
 const Url = require('../lib')
 
 // Json Response Default
-new Url('https://postman-echo.com')
+Url('https://postman-echo.com')
   .go('post')
   // Default Behaviour
   // .encodeResponse('json')
@@ -11,7 +11,7 @@ new Url('https://postman-echo.com')
 
 // String Response Encode
 
-new Url('https://postman-echo.com')
+Url('https://postman-echo.com')
   .go('post')
   .encodeResponse('string')
   .post({ foo1: 'bar1', foo2: 'bar2' })
@@ -20,7 +20,7 @@ new Url('https://postman-echo.com')
 
 // Buffer Response
 
-new Url('https://postman-echo.com')
+Url('https://postman-echo.com')
   .go('post')
   .encodeResponse('buffer')
   .post({ foo1: 'bar1', foo2: 'bar2' })
@@ -29,7 +29,7 @@ new Url('https://postman-echo.com')
 
   // Full Response - Null
 
-new Url('https://postman-echo.com')
+Url('https://postman-echo.com')
   .go('post')
   .encodeResponse(null)
   .post({ foo1: 'bar1', foo2: 'bar2' })
