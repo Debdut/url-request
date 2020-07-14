@@ -1,6 +1,6 @@
 # url-request
 
-[![Generic badge](https://img.shields.io/badge/build-1k-success.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/tests-100%-brightgreen.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/build-1k-success.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/tests-100%25-brightgreen.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/async/await-yes-0390fc.svg)](https://shields.io/) [![Generic badge](https://img.shields.io/badge/functional-yes-fa166a.svg)](https://shields.io/)
 
 > _A HTTP Client and Url Builder with Functional Chaining, Async/Await, Delay, Fork and Infinite Chaining for building your Complex APIs easily._
@@ -22,6 +22,37 @@ const Url = require('url-request')
 ## Examples
 
 Look [Examples](/examples)
+
+### Delay
+
+Delay your requests!
+
+```js
+Url('https://postman-echo.com/post')
+  .delay(2000, () => console.log('Wait 2s'))
+  .post({ foo1: 'bar1', foo2: 'bar2' })
+
+```
+
+### Infinite Chain
+
+See [Infinite Chain Example](/examples/infinite-chain.js)
+
+```js
+Url('https://my-json-server.typicode.com')
+  .go('typicode/demo')
+  .go('posts')
+  .get()
+  .then(json => console.log('[1]', json)) 
+  .catch(err => console.error('[Error]', err))
+  .go(1)
+  .get()
+  .then(json => console.log('[2]', json)) 
+  .catch(err => console.error('[Error]', err))
+  .post()
+  .post()
+  ... // Keep on going!
+```
 
 ### GET Request w/ Promise
 
@@ -58,31 +89,6 @@ const url = Url('https://api.workpay.com')
 // access_token=my-token&password=password#bio
 ```
 
-### POST Request w/ Promise
-
-A POST request with a body `{ subscrbe: 'Apple Music' }` at `https://api.workpay.com/user/123#subscriptions`
-
-```js
-Url('https://api.workpay.com')
-  .go('user', 123)
-  .fragment('subscriptions')
-  .post({ subscrbe: 'Apple Music' })
-  .then(json => console.log(json)) // { success: true }
-  .catch(err => console.error(err))
-```
-
-### Async/Await
-
-```js
-const post = async () => {
-  const request = Url('https://postman-echo.com')
-    .go('post')
-    .post({ foo1: 'bar1', foo2: 'bar2' })
-  
-  return await request
-}
-```
-
 ### Invoke / Execute
 
 ```js
@@ -116,35 +122,29 @@ const achievementsApi = userApi
     .catch(err => console.log(err)))
 ```
 
-### Infinite Chain
+### POST Request w/ Promise
 
-See [Infinite Chain Example](/examples/infinite-chain.js)
+A POST request with a body `{ subscrbe: 'Apple Music' }` at `https://api.workpay.com/user/123#subscriptions`
 
 ```js
-Url('https://my-json-server.typicode.com')
-  .go('typicode/demo')
-  .go('posts')
-  .get()
-  .then(json => console.log('[1]', json)) 
-  .catch(err => console.error('[Error]', err))
-  .go(1)
-  .get()
-  .then(json => console.log('[2]', json)) 
-  .catch(err => console.error('[Error]', err))
-  .post()
-  .post()
-  ... // Keep on going!
+Url('https://api.workpay.com')
+  .go('user', 123)
+  .fragment('subscriptions')
+  .post({ subscrbe: 'Apple Music' })
+  .then(json => console.log(json)) // { success: true }
+  .catch(err => console.error(err))
 ```
 
-### Delay
-
-Delay your requests!
+### Async/Await
 
 ```js
-Url('https://postman-echo.com/post')
-  .delay(2000, () => console.log('Wait 2s'))
-  .post({ foo1: 'bar1', foo2: 'bar2' })
-
+const post = async () => {
+  const request = Url('https://postman-echo.com')
+    .go('post')
+    .post({ foo1: 'bar1', foo2: 'bar2' })
+  
+  return await request
+}
 ```
 
 ## Functions
