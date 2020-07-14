@@ -124,7 +124,7 @@ class Url {
 
   finally (all) {
     this.requestStore = this.requestStore
-      .finally()
+      .finally(all)
     return this
   }
 
@@ -147,6 +147,7 @@ class Url {
     return this[command](...args)
   }
 }
+
 const _Url = (...args) => new Url(...args)
 export default _Url
 // module.exports = Url
