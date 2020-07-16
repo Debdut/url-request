@@ -18,7 +18,7 @@ class Url {
   }
 
   fork () {
-    const clone = Url(this.baseUri, this.headers, this.path, this.queries, this.fragments, this.responseEncoding, this.invokeCommands)
+    const clone = new Url(this.baseUri, this.headers, this.path, this.queries, this.fragments, this.responseEncoding, this.invokeCommands)
 
     return clone
   }
