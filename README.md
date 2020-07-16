@@ -201,3 +201,14 @@ class Url {
   execute (invokeCommands)
 }
 ```
+
+## Upcoming
+
+- [ ] OAuth
+- [ ] HTTP2
+- [ ] Proxy
+- [ ] Compression
+- [ ] Timeout Handling
+- [ ] Custom Hooks
+- [ ] Request Cancellation
+
