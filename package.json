@@ -1,6 +1,6 @@
 {
   "name": "url-request",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "A HTTP Client and Url Builder with Functional Chaining, Async/Await and Fork.",
   "main": "./lib/index.js",
   "scripts": {
