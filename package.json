@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/Debdut/Url#readme",
   "dependencies": {
-    "@debdut/bent": "0.0.3"
+    "@debdut/bent": "0.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
